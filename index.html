@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seni Çok Seviyorum ❤️</title>
+  
+  <!-- Daha şık yazı tipleri için Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      user-select: none;
+    }
+
+    body {
+      /* Hareketli Gradient Arka Plan */
+      background: linear-gradient(-45deg, #ff758c, #ff7eb3, #ff9a9e, #fecfef);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Romantik Başlık */
+    .love-title {
+      font-family: 'Dancing Script', cursive;
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 10;
+      animation: softPulse 3s infinite ease-in-out;
+    }
+
+    /* Arka Plan Kalp Akışı */
+    .heart-bg {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.7);
+      animation: floatUp linear infinite;
+      pointer-events: none;
+      z-index: 1;
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(105vh) translateX(0) scale(0.3);
+        opacity: 0;
+      }
+      20% { opacity: 0.9; }
+      80% { opacity: 0.8; }
+      100% {
+        transform: translateY(-10vh) translateX(30px) scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    /* Geliştirilmiş Cam Efektli Kart */
+    .player-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 25px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15);
+      width: 320px;
+      z-index: 10;
+      transition: transform 0.3s ease;
+    }
+
+    .player-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .spotify-cover {
+      width: 100%;
+      height: 250px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    /* Şarkı çalarken kapağın parlama efekti */
+    .cover-playing {
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.6), 0 0 45px rgba(255, 75, 114, 0.4);
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 75, 114, 0.3); }
+      100% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 50px rgba(255, 75, 114, 0.6); }
+    }
+
+    .track-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .track-details {
+      max-width: 220px;
+      overflow: hidden;
+    }
+
+    .song-title {
+      color: #ffffff;
+      font-size: 1.2rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .artist-name {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .spotify-heart {
+      color: #fff;
+      font-size: 1.5rem;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
+      animation: heartbeat 1.5s infinite;
+      cursor: pointer;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.25); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.25); }
+      60% { transform: scale(1); }
+    }
+
+    /* DİNAMİK DOLAN ÇUBUKLAR */
+    .slider-container {
+      width: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      height: 6px;
+      outline: none;
+      transition: background 0.1s;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #ffffff;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff4b72'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+      background-size: 12px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.3);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    }
+
+    .time-info {
+      display: flex;
+      justify-content: space-between;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.75rem;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    .volume-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 15px;
+      border-radius: 25px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      margin-top: 15px;
+    }
+
+    .ctrl-btn {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.8;
+    }
+
+    .ctrl-btn:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .btn-play {
+      background-color: #ffffff;
+      color: #ff4b72;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      opacity: 1;
+    }
+
+    .btn-play:hover {
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 15px 25px rgba(255, 255, 255, 0.4);
+    }
+
+    .ctrl-btn svg { fill: currentColor; }
+    .btn-play svg { fill: #ff4b72; width: 24px; height: 24px; }
+  </style>
+</head>
+<body>
+
+  <!-- Eklenen Romantik Mesaj -->
+  <h1 class="love-title">Seni Çok Seviyorum</h1>
+
+  <div class="player-card">
+    <img src="resim/kapak1.jpg" id="coverArt" class="spotify-cover" alt="Kapak Resmi">
+
+    <div class="track-info">
+      <div class="track-details">
+        <div class="song-title" id="songTitle">Şarkı Yükleniyor...</div>
+        <div class="artist-name" id="artistName">Sanatçı</div>
+      </div>
+      <div class="spotify-heart">💖</div>
+    </div>
+
+    <div class="progress-wrapper">
+      <div class="slider-container">
+        <input type="range" id="progressBar" value="0" min="0" max="100">
+      </div>
+      <div class="time-info">
+        <span id="currentTime">0:00</span>
+        <span id="duration">0:00</span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="ctrl-btn" onclick="prevSong()">
+        <svg width="24" height="24" viewBox="0 0 16 16"><path d="M13 2.5L5 8l8 5.5V2.5zM3 2.5h2v11H3v-11z"/></svg>
+      </button>
+
+      <button class="ctrl-btn btn-play" id="playBtn" onclick="togglePlay()">
+        <svg id="playIcon" viewBox="0 0 16 16"><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/></svg>
+      </button>
+
+      <button class="ctrl-btn" onclick="nextSong()">
+        <svg width="24" height="24" viewBox="0 0 16 16"><path d="M11 2.5h2v11h-2v-11zM3 2.5l8 5.5-8 5.5V2.5z"/></svg>
+      </button>
+    </div>
+
+    <div class="volume-wrapper">
+      <span style="color: white; font-size: 14px;">🔈</span>
+      <div class="slider-container">
+        <input type="range" id="volumeBar" value="80" min="0" max="100">
+      </div>
+      <span style="color: white; font-size: 14px;">🔊</span>
+    </div>
+
+    <audio id="audioPlayer"></audio>
+  </div>
+
+  <script>
+    const playlist = [
+      { title: "LaLaLa!", artist: "Jeff RED", cover: "resim/lalala.png", file: "sarki/lalala.mp3" },
+      { title: "Yıldızlar Şahit Aşkıma", artist: "Lvbel C5", cover: "resim/yildiz.jpg", file: "sarki/yildizlarsahitaskima.mp3" },
+      { title: "Yenildiğim Tek Savaştın", artist: "ASLAR · Lessio · Astral", cover: "resim/yenildigimteksavastin.png", file: "sarki/yenildigimteksavastin.mp3" },
+      { title: "Geri Ver", artist: "Wegh", cover: "resim/geriveri.jpg", file: "sarki/geriver.mp3" }
+    ];
+
+    let currentTrack = 0;
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playIcon = document.getElementById('playIcon');
+    const songTitle = document.getElementById('songTitle');
+    const artistName = document.getElementById('artistName');
+    const coverArt = document.getElementById('coverArt');
+    const progressBar = document.getElementById('progressBar');
+    const volumeBar = document.getElementById('volumeBar');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationEl = document.getElementById('duration');
+
+    const playSVG = `<path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/>`;
+    const pauseSVG = `<path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"/>`;
+
+    // Çubukların (Slider) içini renklendiren fonksiyon
+    function updateSliderBackground(slider) {
+      const val = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+      slider.style.background = `linear-gradient(to right, #ffffff ${val}%, rgba(255, 255, 255, 0.2) ${val}%)`;
+    }
+
+    function loadTrack(index) {
+      const track = playlist[index];
+      audioPlayer.src = track.file;
+      songTitle.innerText = track.title;
+      artistName.innerText = track.artist;
+      coverArt.src = track.cover;
+      
+      progressBar.value = 0;
+      updateSliderBackground(progressBar);
+      
+      // Şarkı yüklenirken cover efektini sıfırla
+      if(!audioPlayer.paused) { coverArt.classList.add('cover-playing'); }
+      else { coverArt.classList.remove('cover-playing'); }
+    }
+
+    function togglePlay() {
+      if (audioPlayer.paused) {
+        audioPlayer.play();
+        playIcon.innerHTML = pauseSVG;
+        coverArt.classList.add('cover-playing');
+      } else {
+        audioPlayer.pause();
+        playIcon.innerHTML = playSVG;
+        coverArt.classList.remove('cover-playing');
+      }
+    }
+
+    function nextSong() {
+      currentTrack = (currentTrack + 1) % playlist.length;
+      loadTrack(currentTrack);
+      audioPlayer.play();
+      playIcon.innerHTML = pauseSVG;
+      coverArt.classList.add('cover-playing');
+    }
+
+    function prevSong() {
+      currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+      loadTrack(currentTrack);
+      audioPlayer.play();
+      playIcon.innerHTML = pauseSVG;
+      coverArt.classList.add('cover-playing');
+    }
+
+    // Şarkı Süresi Akarken
+    audioPlayer.addEventListener('timeupdate', () => {
+      if (audioPlayer.duration) {
+        const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+        progressBar.value = percent;
+        updateSliderBackground(progressBar);
+        currentTimeEl.innerText = formatTime(audioPlayer.currentTime);
+        durationEl.innerText = formatTime(audioPlayer.duration);
+      }
+    });
+
+    // İlerleme Çubuğu Eventleri
+    progressBar.addEventListener('input', () => {
+      updateSliderBackground(progressBar);
+      const seekTime = (progressBar.value / 100) * audioPlayer.duration;
+      audioPlayer.currentTime = seekTime;
+    });
+
+    // Ses Çubuğu Eventleri
+    volumeBar.addEventListener('input', () => {
+      updateSliderBackground(volumeBar);
+      audioPlayer.volume = volumeBar.value / 100;
+    });
+
+    function formatTime(seconds) {
+      if(isNaN(seconds)) return "0:00";
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+
+    audioPlayer.addEventListener('ended', nextSong);
+
+    // Arka Plan Organik Kalp Yağmuru
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart-bg');
+      const hearts = ['🤍', '💖', '✨', '🌸', '💕'];
+      heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+      
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 5 + 's';
+      heart.style.fontSize = Math.random() * 14 + 10 + 'px';
+      
+      document.body.appendChild(heart);
+      setTimeout(() => { heart.remove(); }, 8000);
+    }
+    
+    setInterval(createHeart, 300);
+
+    // Başlangıç Ayarları
+    loadTrack(currentTrack);
+    audioPlayer.volume = 0.8;
+    updateSliderBackground(volumeBar);
+  </script>
+</body>
+</html>
