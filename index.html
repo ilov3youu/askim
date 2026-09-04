@@ -5,276 +5,120 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Seni Çok Seviyorum ❤️</title>
   
-  <!-- Daha şık yazı tipleri için Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      user-select: none;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; user-select: none; }
 
     body {
-      /* Hareketli Gradient Arka Plan */
-      background: linear-gradient(-45deg, #ff758c, #ff7eb3, #ff9a9e, #fecfef);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      position: relative;
+      background: linear-gradient(-45deg, #ff9a9e, #fecfef, #ff758c, #ff7eb3);
+      background-size: 300% 300%;
+      animation: gradientBG 12s ease infinite;
+      height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; overflow: hidden; position: relative;
+      perspective: 1200px;
     }
 
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-    /* Romantik Başlık */
-    .love-title {
-      font-family: 'Dancing Script', cursive;
-      color: white;
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      text-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      z-index: 10;
-      animation: softPulse 3s infinite ease-in-out;
-    }
+    .love-title { font-family: 'Dancing Script', cursive; color: white; font-size: 2.8rem; margin-bottom: 25px; text-shadow: 0 4px 15px rgba(255, 75, 114, 0.5); z-index: 10; animation: softPulse 3s infinite ease-in-out; }
+    @keyframes softPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-    /* Arka Plan Kalp Akışı */
-    .heart-bg {
-      position: absolute;
-      color: rgba(255, 255, 255, 0.7);
-      animation: floatUp linear infinite;
-      pointer-events: none;
-      z-index: 1;
-      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
-    }
+    .heart-bg { position: absolute; color: rgba(255, 255, 255, 0.6); animation: floatUp linear infinite; pointer-events: none; z-index: 1; }
+    @keyframes floatUp { 0% { transform: translateY(105vh) scale(0.3) rotate(0deg); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; } }
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(105vh) translateX(0) scale(0.3);
-        opacity: 0;
-      }
-      20% { opacity: 0.9; }
-      80% { opacity: 0.8; }
-      100% {
-        transform: translateY(-10vh) translateX(30px) scale(1.3);
-        opacity: 0;
-      }
-    }
-
-    /* Geliştirilmiş Cam Efektli Kart */
+    /* Ana Kart (3D) */
     .player-card {
+      background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+      padding: 30px; border-radius: 35px; border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.2); 
+      width: 340px; z-index: 10; position: relative;
+      transform-style: preserve-3d; transition: transform 0.1s ease-out;
+    }
+
+    .cover-wrapper { transform: translateZ(40px); display: flex; justify-content: center; margin-bottom: 20px; position: relative; }
+    .track-details { transform: translateZ(30px); text-align: center; margin-bottom: 15px; }
+    .controls { transform: translateZ(50px); display: flex; justify-content: center; align-items: center; gap: 25px; margin-top: 15px; }
+    .volume-wrapper { transform: translateZ(20px); display: flex; align-items: center; gap: 12px; margin-top: 20px; background: rgba(255, 255, 255, 0.1); padding: 10px 15px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); }
+    
+    .message-btn { position: absolute; top: 25px; right: 25px; background: rgba(255,255,255,0.2); border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; transition: all 0.3s; z-index: 20; color: white; transform: translateZ(40px); }
+    .message-btn:hover { background: white; box-shadow: 0 0 15px rgba(255,255,255,0.8); }
+
+    .spotify-cover { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; box-shadow: 0 15px 35px rgba(0,0,0,0.2), 0 0 0 8px rgba(255,255,255,0.2); transition: all 0.5s ease; }
+    .cover-playing { animation: spin 6s linear infinite; box-shadow: 0 15px 35px rgba(0,0,0,0.3), 0 0 0 8px rgba(255,255,255,0.4), 0 0 30px rgba(255, 75, 114, 0.5); }
+    .cover-wrapper::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 25px; height: 25px; background: rgba(255,255,255,0.8); border-radius: 50%; box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); pointer-events: none; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    .song-title { color: #fff; font-size: 1.3rem; font-weight: 600; text-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .artist-name { color: rgba(255, 255, 255, 0.85); font-size: 0.95rem; margin-top: 4px; }
+    .song-note { color: #ffebf0; font-size: 0.8rem; font-style: italic; margin-top: 8px; opacity: 0.9; }
+
+    .slider-container { width: 100%; position: relative; display: flex; align-items: center; }
+    input[type=range] { -webkit-appearance: none; width: 100%; background: rgba(255, 255, 255, 0.3); border-radius: 10px; height: 6px; outline: none; transition: background 0.1s; cursor: pointer; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%; background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff4b72'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E"); background-size: 12px; background-position: center; background-repeat: no-repeat; cursor: pointer; box-shadow: 0 0 10px rgba(0,0,0,0.2); transition: transform 0.2s; }
+    input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
+
+    .time-info { display: flex; justify-content: space-between; color: white; font-size: 0.75rem; margin-top: 8px; font-weight: 500; }
+    
+    .ctrl-btn { background: none; border: none; color: white; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; }
+    .ctrl-btn:hover { filter: drop-shadow(0 0 8px rgba(255,255,255,0.6)); }
+    .btn-play { background-color: #fff; color: #ff4b72; width: 55px; height: 55px; border-radius: 50%; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
+    .btn-play:hover { box-shadow: 0 15px 30px rgba(255, 255, 255, 0.4); }
+    .ctrl-btn svg { fill: currentColor; } .btn-play svg { fill: #ff4b72; width: 24px; height: 24px; }
+    .vol-icon { color: white; font-size: 14px; }
+
+    /* YENİ EKLENEN: Aşk Termometresi */
+    .thermo-container {
+      margin-top: 25px;
       background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 25px;
-      border-radius: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15);
-      width: 320px;
+      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      padding: 20px 25px; border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
       z-index: 10;
-      transition: transform 0.3s ease;
+      transform-style: preserve-3d; transform: translateZ(30px);
+      transition: all 0.3s ease; text-align: center;
+      width: 340px;
     }
+    .thermo-container:hover { transform: translateZ(45px); }
+    
+    .thermo-text { color: white; font-size: 1.05rem; font-weight: 600; margin-bottom: 12px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .thermo-text span { font-size: 0.85rem; font-weight: 400; opacity: 0.9; display: block; margin-top: 4px; }
+    
+    .thermo-bar-bg { width: 100%; height: 14px; background: rgba(255,255,255,0.3); border-radius: 10px; overflow: hidden; margin-bottom: 15px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.1); }
+    .thermo-bar-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #ff758c, #ff2a55); border-radius: 10px; box-shadow: 0 0 10px rgba(255, 75, 114, 0.5); }
+    
+    .thermo-btn { font-size: 3rem; background: none; border: none; cursor: pointer; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2)); transition: transform 0.1s ease; touch-action: none; -webkit-tap-highlight-color: transparent; outline: none; animation: pulseHeart 1.5s infinite; }
+    .thermo-btn:active { transform: scale(0.85); animation: none; }
+    @keyframes pulseHeart { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
-    .player-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .spotify-cover {
-      width: 100%;
-      height: 250px;
-      border-radius: 20px;
-      object-fit: cover;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-      margin-bottom: 20px;
-      transition: all 0.3s ease;
-    }
-
-    /* Şarkı çalarken kapağın parlama efekti */
-    .cover-playing {
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.6), 0 0 45px rgba(255, 75, 114, 0.4);
-      animation: pulseGlow 2s infinite alternate;
-    }
-
-    @keyframes pulseGlow {
-      0% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 0 25px rgba(255, 75, 114, 0.3); }
-      100% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 50px rgba(255, 75, 114, 0.6); }
-    }
-
-    .track-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .track-details {
-      max-width: 220px;
-      overflow: hidden;
-    }
-
-    .song-title {
-      color: #ffffff;
-      font-size: 1.2rem;
-      font-weight: 700;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-
-    .artist-name {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.9rem;
-      font-weight: 500;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .spotify-heart {
-      color: #fff;
-      font-size: 1.5rem;
-      filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
-      animation: heartbeat 1.5s infinite;
-      cursor: pointer;
-    }
-
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      15% { transform: scale(1.25); }
-      30% { transform: scale(1); }
-      45% { transform: scale(1.25); }
-      60% { transform: scale(1); }
-    }
-
-    /* DİNAMİK DOLAN ÇUBUKLAR */
-    .slider-container {
-      width: 100%;
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    input[type=range] {
-      -webkit-appearance: none;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
-      height: 6px;
-      outline: none;
-      transition: background 0.1s;
-    }
-
-    input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      height: 20px;
-      width: 20px;
-      border-radius: 50%;
-      background: #ffffff;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff4b72'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
-      background-size: 12px;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
-    input[type=range]::-webkit-slider-thumb:hover {
-      transform: scale(1.3);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-    }
-
-    .time-info {
-      display: flex;
-      justify-content: space-between;
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 0.75rem;
-      margin-top: 6px;
-      font-weight: 500;
-    }
-
-    .volume-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 10px 15px;
-      border-radius: 25px;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 25px;
-      margin-top: 15px;
-    }
-
-    .ctrl-btn {
-      background: none;
-      border: none;
-      color: white;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0.8;
-    }
-
-    .ctrl-btn:hover {
-      opacity: 1;
-      transform: scale(1.1);
-    }
-
-    .btn-play {
-      background-color: #ffffff;
-      color: #ff4b72;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-      opacity: 1;
-    }
-
-    .btn-play:hover {
-      transform: scale(1.05) translateY(-2px);
-      box-shadow: 0 15px 25px rgba(255, 255, 255, 0.4);
-    }
-
-    .ctrl-btn svg { fill: currentColor; }
-    .btn-play svg { fill: #ff4b72; width: 24px; height: 24px; }
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: all 0.4s ease; z-index: 100; }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-content { background: rgba(255, 255, 255, 0.95); padding: 40px 30px; border-radius: 25px; width: 85%; max-width: 400px; text-align: center; transform: translateY(50px); transition: all 0.4s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+    .modal-overlay.active .modal-content { transform: translateY(0); }
+    .modal-content h2 { font-family: 'Dancing Script', cursive; color: #ff4b72; font-size: 2.2rem; margin-bottom: 15px; }
+    .modal-content p { color: #444; font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; }
+    .close-btn { background: #ff4b72; color: white; border: none; padding: 10px 25px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+    .close-btn:hover { background: #ff2a55; box-shadow: 0 5px 15px rgba(255, 75, 114, 0.4); }
   </style>
 </head>
 <body>
 
-  <!-- Eklenen Romantik Mesaj -->
   <h1 class="love-title">Seni Çok Seviyorum</h1>
 
-  <div class="player-card">
-    <img src="resim/kapak1.jpg" id="coverArt" class="spotify-cover" alt="Kapak Resmi">
+  <div class="player-card" id="3dCard">
+    <button class="message-btn" onclick="toggleModal()">💌</button>
 
-    <div class="track-info">
-      <div class="track-details">
-        <div class="song-title" id="songTitle">Şarkı Yükleniyor...</div>
-        <div class="artist-name" id="artistName">Sanatçı</div>
-      </div>
-      <div class="spotify-heart">💖</div>
+    <div class="cover-wrapper">
+      <img src="resim/kapak1.jpg" id="coverArt" class="spotify-cover" alt="Kapak Resmi">
+    </div>
+
+    <div class="track-details">
+      <div class="song-title" id="songTitle">Şarkı Yükleniyor...</div>
+      <div class="artist-name" id="artistName">Sanatçı</div>
+      <div class="song-note" id="songNote">"Seninle dinlemek en güzeli..."</div>
     </div>
 
     <div class="progress-wrapper">
@@ -300,24 +144,41 @@
         <svg width="24" height="24" viewBox="0 0 16 16"><path d="M11 2.5h2v11h-2v-11zM3 2.5l8 5.5-8 5.5V2.5z"/></svg>
       </button>
     </div>
-
+    
     <div class="volume-wrapper">
-      <span style="color: white; font-size: 14px;">🔈</span>
+      <span class="vol-icon">🔈</span>
       <div class="slider-container">
         <input type="range" id="volumeBar" value="80" min="0" max="100">
       </div>
-      <span style="color: white; font-size: 14px;">🔊</span>
+      <span class="vol-icon">🔊</span>
     </div>
 
     <audio id="audioPlayer"></audio>
   </div>
 
+  <!-- YENİ EKLENEN: Aşk Termometresi -->
+  <div class="thermo-container">
+    <p class="thermo-text" id="thermoTitle">Beni ne kadar seviyorsun?<br><span id="thermoSub">(Kalbe basılı tut)</span></p>
+    <div class="thermo-bar-bg">
+      <div class="thermo-bar-fill" id="thermoFill"></div>
+    </div>
+    <button class="thermo-btn" id="thermoBtn">❤️</button>
+  </div>
+
+  <div class="modal-overlay" id="messageModal">
+    <div class="modal-content">
+      <h2>Benim Güzel Sevgilim,</h2>
+      <p>Buraya kendi duygularını uzun uzun yazabilirsin. Seni ne kadar sevdiğimi kelimelerle anlatmam zor ama bu küçük hediye hislerimin bir parçası olsun. İyi ki varsın... ❤️</p>
+      <button class="close-btn" onclick="toggleModal()">Kapat</button>
+    </div>
+  </div>
+
   <script>
     const playlist = [
-      { title: "LaLaLa!", artist: "Jeff RED", cover: "lalala.png", file: "lalala.mp3" },
-      { title: "Yıldızlar Şahit Aşkıma", artist: "Lvbel C5", cover: "yildiz.jpg", file: "yildizlarsahitaskima.mp3" },
-      { title: "Yenildiğim Tek Savaştın", artist: "ASLAR · Lessio · Astral", cover: "yenildigimteksavastin.png", file: "yenildigimteksavastin.mp3" },
-      { title: "Geri Ver", artist: "Wegh", cover: "geriveri.jpg", file: "geriver.mp3" }
+      { title: "LaLaLa!", artist: "Jeff RED", note: "Bu şarkının enerjisi tam bizlik 💖", cover: "resim/lalala.png", file: "sarki/lalala.mp3" },
+      { title: "Yıldızlar Şahit Aşkıma", artist: "Lvbel C5", note: "Gökyüzündeki tüm yıldızlar şahidim ✨", cover: "resim/yildiz.jpg", file: "sarki/yildizlarsahitaskima.mp3" },
+      { title: "Yenildiğim Tek Savaştın", artist: "ASLAR", note: "Sana yenilmek dünyanın en güzel hissi 🤍", cover: "resim/yenildigimteksavastin.png", file: "sarki/yenildigimteksavastin.mp3" },
+      { title: "Geri Ver", artist: "Wegh", note: "Sensiz geçen zamanı geri ver... 🌸", cover: "resim/geriveri.jpg", file: "sarki/geriver.mp3" }
     ];
 
     let currentTrack = 0;
@@ -325,16 +186,113 @@
     const playIcon = document.getElementById('playIcon');
     const songTitle = document.getElementById('songTitle');
     const artistName = document.getElementById('artistName');
+    const songNote = document.getElementById('songNote');
     const coverArt = document.getElementById('coverArt');
     const progressBar = document.getElementById('progressBar');
     const volumeBar = document.getElementById('volumeBar');
     const currentTimeEl = document.getElementById('currentTime');
     const durationEl = document.getElementById('duration');
+    const messageModal = document.getElementById('messageModal');
+    const card = document.getElementById('3dCard');
 
     const playSVG = `<path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/>`;
     const pauseSVG = `<path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"/>`;
 
-    // Çubukların (Slider) içini renklendiren fonksiyon
+    // --- AŞK TERMOMETRESİ SCRİPTİ ---
+    let fillInterval;
+    let drainInterval;
+    let thermoValue = 0;
+    let isCompleted = false;
+    
+    const thermoFill = document.getElementById('thermoFill');
+    const thermoBtn = document.getElementById('thermoBtn');
+    const thermoTitle = document.getElementById('thermoTitle');
+    const thermoSub = document.getElementById('thermoSub');
+
+    function startThermo(e) {
+      if(e.type === 'touchstart') e.preventDefault();
+      if(isCompleted) return;
+      
+      clearInterval(drainInterval);
+      thermoBtn.style.animation = 'none';
+      
+      fillInterval = setInterval(() => {
+        if (thermoValue < 100) {
+          thermoValue += 1.5; // Dolma hızı (sayıyı artırırsan daha hızlı dolar)
+          thermoFill.style.width = thermoValue + '%';
+          
+          if (thermoValue > 25 && thermoValue < 60) {
+            thermoSub.innerText = "(Hadi biraz daha...)";
+          } else if (thermoValue >= 60 && thermoValue < 95) {
+            thermoSub.innerText = "(Az kaldı! 💖)";
+          } else if (thermoValue >= 100) {
+            finishThermo();
+          }
+        }
+      }, 30);
+    }
+
+    function stopThermo(e) {
+      if(isCompleted) return;
+      clearInterval(fillInterval);
+      thermoBtn.style.animation = 'pulseHeart 1.5s infinite';
+      
+      drainInterval = setInterval(() => {
+        if (thermoValue > 0) {
+          thermoValue -= 1.5; // Düşme hızı
+          thermoFill.style.width = thermoValue + '%';
+          if(thermoValue < 25) thermoSub.innerText = "(Kalbe basılı tut)";
+        } else {
+          thermoValue = 0;
+          clearInterval(drainInterval);
+        }
+      }, 30);
+    }
+
+    function finishThermo() {
+      isCompleted = true;
+      clearInterval(fillInterval);
+      thermoValue = 100;
+      thermoFill.style.width = '100%';
+      
+      thermoTitle.innerHTML = "Ben seni DAHA ÇOK seviyorum! ❤️";
+      thermoBtn.style.transform = 'scale(1.2)';
+      thermoBtn.style.pointerEvents = 'none';
+      
+      // Mobilde titreşim (Destekleyen cihazlarda)
+      if(navigator.vibrate) navigator.vibrate([100, 50, 100]);
+      
+      // Ekranda kalp patlaması
+      for(let i=0; i<35; i++) {
+        setTimeout(createHeart, i * 60);
+      }
+    }
+
+    thermoBtn.addEventListener('mousedown', startThermo);
+    thermoBtn.addEventListener('touchstart', startThermo, {passive: false});
+    window.addEventListener('mouseup', stopThermo);
+    window.addEventListener('touchend', stopThermo);
+    // --------------------------------
+
+    // Masaüstü 3D Etkisi
+    document.addEventListener('mousemove', (e) => {
+      let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+      let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+      card.style.transform = `rotateY(${-xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+    document.addEventListener('mouseleave', () => {
+      card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+      card.style.transition = 'transform 0.5s ease';
+    });
+    document.addEventListener('mouseenter', () => { card.style.transition = 'none'; });
+
+    // Mobil 3D Etkisi
+    window.addEventListener("deviceorientation", (e) => {
+      let xAxis = Math.max(-15, Math.min(15, e.gamma / 2));
+      let yAxis = Math.max(-15, Math.min(15, (e.beta - 45) / 2));
+      card.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis}deg)`;
+    });
+
     function updateSliderBackground(slider) {
       const val = (slider.value - slider.min) / (slider.max - slider.min) * 100;
       slider.style.background = `linear-gradient(to right, #ffffff ${val}%, rgba(255, 255, 255, 0.2) ${val}%)`;
@@ -345,12 +303,10 @@
       audioPlayer.src = track.file;
       songTitle.innerText = track.title;
       artistName.innerText = track.artist;
+      songNote.innerText = track.note;
       coverArt.src = track.cover;
-      
       progressBar.value = 0;
       updateSliderBackground(progressBar);
-      
-      // Şarkı yüklenirken cover efektini sıfırla
       if(!audioPlayer.paused) { coverArt.classList.add('cover-playing'); }
       else { coverArt.classList.remove('cover-playing'); }
     }
@@ -383,7 +339,6 @@
       coverArt.classList.add('cover-playing');
     }
 
-    // Şarkı Süresi Akarken
     audioPlayer.addEventListener('timeupdate', () => {
       if (audioPlayer.duration) {
         const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
@@ -394,14 +349,12 @@
       }
     });
 
-    // İlerleme Çubuğu Eventleri
     progressBar.addEventListener('input', () => {
       updateSliderBackground(progressBar);
       const seekTime = (progressBar.value / 100) * audioPlayer.duration;
       audioPlayer.currentTime = seekTime;
     });
 
-    // Ses Çubuğu Eventleri
     volumeBar.addEventListener('input', () => {
       updateSliderBackground(volumeBar);
       audioPlayer.volume = volumeBar.value / 100;
@@ -416,24 +369,21 @@
 
     audioPlayer.addEventListener('ended', nextSong);
 
-    // Arka Plan Organik Kalp Yağmuru
+    function toggleModal() { messageModal.classList.toggle('active'); }
+
     function createHeart() {
       const heart = document.createElement('div');
       heart.classList.add('heart-bg');
       const hearts = ['🤍', '💖', '✨', '🌸', '💕'];
       heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
-      
       heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = Math.random() * 3 + 5 + 's';
-      heart.style.fontSize = Math.random() * 14 + 10 + 'px';
-      
+      heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+      heart.style.fontSize = Math.random() * 15 + 10 + 'px';
       document.body.appendChild(heart);
-      setTimeout(() => { heart.remove(); }, 8000);
+      setTimeout(() => { heart.remove(); }, 7000);
     }
-    
-    setInterval(createHeart, 300);
+    setInterval(createHeart, 400);
 
-    // Başlangıç Ayarları
     loadTrack(currentTrack);
     audioPlayer.volume = 0.8;
     updateSliderBackground(volumeBar);
