@@ -28,7 +28,6 @@
     .heart-bg { position: absolute; color: rgba(255, 255, 255, 0.6); animation: floatUp linear infinite; pointer-events: none; z-index: 1; }
     @keyframes floatUp { 0% { transform: translateY(105vh) scale(0.3) rotate(0deg); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; } }
 
-    /* Ana Kart (Sabit) */
     .player-card {
       background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
       padding: 30px; border-radius: 35px; border: 1px solid rgba(255, 255, 255, 0.5);
@@ -173,10 +172,10 @@
 
   <script>
     const playlist = [
-      { title: "LaLaLa!", artist: "Jeff RED", note: "Bu şarkının enerjisi tam bizlik 💖", cover: "lalala.png", file: "lalala.mp3" },
-      { title: "Yıldızlar Şahit Aşkıma", artist: "Lvbel C5", note: "Gökyüzündeki tüm yıldızlar şahidim ✨", cover: "yildiz.jpg", file: "yildizlarsahitaskima.mp3" },
-      { title: "Yenildiğim Tek Savaştın", artist: "ASLAR", note: "Sana yenilmek dünyanın en güzel hissi 🤍", cover: "yenildigimteksavastin.png", file: "yenildigimteksavastin.mp3" },
-      { title: "Geri Ver", artist: "Wegh", note: "Sensiz geçen zamanı geri ver... 🌸", cover: "geriveri.jpg", file: "geriver.mp3" }
+      { title: "LaLaLa!", artist: "Jeff RED", note: "Bu şarkının enerjisi tam bizlik 💖", cover: "resim/lalala.png", file: "sarki/lalala.mp3" },
+      { title: "Yıldızlar Şahit Aşkıma", artist: "Lvbel C5", note: "Gökyüzündeki tüm yıldızlar şahidim ✨", cover: "resim/yildiz.jpg", file: "sarki/yildizlarsahitaskima.mp3" },
+      { title: "Yenildiğim Tek Savaştın", artist: "ASLAR", note: "Sana yenilmek dünyanın en güzel hissi 🤍", cover: "resim/yenildigimteksavastin.png", file: "sarki/yenildigimteksavastin.mp3" },
+      { title: "Geri Ver", artist: "Wegh", note: "Sensiz geçen zamanı geri ver... 🌸", cover: "resim/geriveri.jpg", file: "sarki/geriver.mp3" }
     ];
 
     let currentTrack = 0;
@@ -195,7 +194,7 @@
     const playSVG = `<path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/>`;
     const pauseSVG = `<path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"/>`;
 
-    // --- AŞK TERMOMETRESİ SCRİPTİ ---
+    // --- AŞK TERMOMETRESİ SCRİPTİ (GÜNCELLENDİ) ---
     let fillInterval;
     let drainInterval;
     let thermoValue = 0;
@@ -204,7 +203,6 @@
     const thermoFill = document.getElementById('thermoFill');
     const thermoBtn = document.getElementById('thermoBtn');
     const thermoTitle = document.getElementById('thermoTitle');
-    const thermoSub = document.getElementById('thermoSub');
 
     function startThermo(e) {
       if(e.type === 'touchstart') e.preventDefault();
@@ -218,11 +216,15 @@
           thermoValue += 1.5; 
           thermoFill.style.width = thermoValue + '%';
           
-          if (thermoValue > 25 && thermoValue < 60) {
-            thermoSub.innerText = "(Hadi biraz daha...)";
-          } else if (thermoValue >= 60 && thermoValue < 95) {
-            thermoSub.innerText = "(Az kaldı! 💖)";
-          } else if (thermoValue >= 100) {
+          let sub = document.getElementById('thermoSub');
+          if(sub) {
+            if (thermoValue > 25 && thermoValue < 60) {
+              sub.innerText = "(Hadi biraz daha...)";
+            } else if (thermoValue >= 60 && thermoValue < 95) {
+              sub.innerText = "(Az kaldı! 💖)";
+            }
+          }
+          if (thermoValue >= 100) {
             finishThermo();
           }
         }
@@ -238,7 +240,8 @@
         if (thermoValue > 0) {
           thermoValue -= 1.5; 
           thermoFill.style.width = thermoValue + '%';
-          if(thermoValue < 25) thermoSub.innerText = "(Kalbe basılı tut)";
+          let sub = document.getElementById('thermoSub');
+          if(sub && thermoValue < 25) sub.innerText = "(Kalbe basılı tut)";
         } else {
           thermoValue = 0;
           clearInterval(drainInterval);
@@ -252,7 +255,7 @@
       thermoValue = 100;
       thermoFill.style.width = '100%';
       
-      thermoTitle.innerHTML = "Ben seni DAHA ÇOK seviyorum! ❤️";
+      thermoTitle.innerHTML = "Ben seni DAHA ÇOK seviyorum! ❤️<br><span id='thermoSub'></span>";
       thermoBtn.style.transform = 'scale(1.2)';
       thermoBtn.style.pointerEvents = 'none';
       
@@ -261,6 +264,17 @@
       for(let i=0; i<35; i++) {
         setTimeout(createHeart, i * 60);
       }
+
+      // SIFIRLAMA İŞLEMİ (5 saniye sonra)
+      setTimeout(() => {
+        isCompleted = false;
+        thermoValue = 0;
+        thermoFill.style.width = '0%';
+        thermoTitle.innerHTML = "Beni ne kadar seviyorsun?<br><span id='thermoSub'>(Tekrar dene)</span>";
+        thermoBtn.style.transform = 'scale(1)';
+        thermoBtn.style.pointerEvents = 'auto';
+        thermoBtn.style.animation = 'pulseHeart 1.5s infinite';
+      }, 5000);
     }
 
     thermoBtn.addEventListener('mousedown', startThermo);
