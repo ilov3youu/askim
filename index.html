@@ -2,7 +2,6 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <!-- MOBİL İÇİN KRİTİK: Yakınlaştırmayı ve ekran bozulmasını engeller -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <title>Seni Çok Seviyorum ❤️</title>
   
@@ -13,7 +12,6 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; user-select: none; }
 
-    /* MOBİL İÇİN KRİTİK: touch-action: none ile istenmeyen ekran kaydırmalarını kapattık */
     body {
       background: linear-gradient(-45deg, #ff9a9e, #fecfef, #ff758c, #ff7eb3);
       background-size: 300% 300%;
@@ -24,27 +22,20 @@
     }
 
     @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-
-    @keyframes slideUpFade {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes slideUpFade { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
     .love-title { 
       font-family: 'Dancing Script', cursive; color: white; font-size: 2.8rem; margin-bottom: 5px; 
       text-shadow: 0 4px 15px rgba(255, 75, 114, 0.5); z-index: 10; 
-      animation: softPulse 3s infinite ease-in-out, slideUpFade 1s ease-out; 
-      text-align: center;
+      animation: softPulse 3s infinite ease-in-out, slideUpFade 1s ease-out; text-align: center;
     }
     @keyframes softPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-    /* Zaman Sayacı */
     .time-counter {
       background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);
       padding: 5px 15px; border-radius: 20px; color: white; font-size: 0.85rem;
       margin-bottom: 20px; z-index: 10; border: 1px solid rgba(255,255,255,0.3);
-      animation: slideUpFade 1.2s ease-out; font-weight: 500; letter-spacing: 0.5px;
-      text-align: center;
+      animation: slideUpFade 1.2s ease-out; font-weight: 500; letter-spacing: 0.5px; text-align: center;
     }
 
     /* Büyü Tozları */
@@ -53,20 +44,13 @@
       pointer-events: none; z-index: 99; animation: dustFade 0.6s ease-out forwards;
       box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.8);
     }
-    @keyframes dustFade {
-      0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(0.2) translateY(20px); opacity: 0; }
-    }
+    @keyframes dustFade { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0.2) translateY(20px); opacity: 0; } }
 
     /* Arka Plan Objeleri */
     .floating-obj { position: absolute; animation: floatUp linear infinite; pointer-events: none; z-index: 1; }
-    @keyframes floatUp { 
-      0% { transform: translateY(105vh) scale(0.3) rotate(0deg); opacity: 0; } 
-      20% { opacity: 0.7; } 
-      100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; } 
-    }
+    @keyframes floatUp { 0% { transform: translateY(105vh) scale(0.3) rotate(0deg); opacity: 0; } 20% { opacity: 0.7; } 100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; } }
 
-    /* Kayan Yıldızlar - Yenilendi */
+    /* Kayan Yıldızlar */
     .shooting-star {
       position: absolute; width: 4px; height: 4px; background: #fff; border-radius: 50%;
       box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.9); pointer-events: none; z-index: 2;
@@ -76,11 +60,7 @@
       content: ''; position: absolute; top: 50%; transform: translateY(-50%);
       width: 90px; height: 2px; background: linear-gradient(90deg, white, transparent);
     }
-    @keyframes shoot {
-      0% { transform: translate(0, 0) rotate(-45deg); opacity: 1; }
-      /* Daha uzun mesafe gitsin ki ekranda yarım kalmasın */
-      100% { transform: translate(-120vw, 120vh) rotate(-45deg); opacity: 0; } 
-    }
+    @keyframes shoot { 0% { transform: translate(0, 0) rotate(-45deg); opacity: 1; } 100% { transform: translate(-120vw, 120vh) rotate(-45deg); opacity: 0; } }
 
     /* Ana Kart */
     .player-card {
@@ -88,33 +68,26 @@
       padding: 30px; border-radius: 35px; border: 1px solid rgba(255, 255, 255, 0.5);
       box-shadow: 0 30px 50px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.2); 
       width: 90%; max-width: 350px; z-index: 10; position: relative;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      animation: slideUpFade 1.2s ease-out;
+      transition: transform 0.4s ease, box-shadow 0.4s ease; animation: slideUpFade 1.2s ease-out;
     }
 
     .cover-wrapper { display: flex; justify-content: center; margin-bottom: 20px; position: relative; }
     .track-details { text-align: center; margin-bottom: 15px; }
-    
     .spotify-cover { width: 170px; height: 170px; border-radius: 50%; object-fit: cover; box-shadow: 0 15px 35px rgba(0,0,0,0.2), 0 0 0 8px rgba(255,255,255,0.2); transition: all 0.5s ease; position: relative; z-index: 2; }
     .cover-playing { animation: spin 8s linear infinite; box-shadow: 0 15px 35px rgba(0,0,0,0.3), 0 0 0 8px rgba(255,255,255,0.4), 0 0 40px rgba(255, 75, 114, 0.6); }
     .cover-wrapper::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 25px; height: 25px; background: rgba(255,255,255,0.8); border-radius: 50%; box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); pointer-events: none; z-index: 3; }
     @keyframes spin { 100% { transform: rotate(360deg); } }
 
-    /* Ritmik Ses Halkaları */
     .pulse-ring {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
       width: 170px; height: 170px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.6);
       z-index: 1; opacity: 0; pointer-events: none;
     }
     .pulse-ring.active { animation: pulseAnim 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1); }
-    @keyframes pulseAnim {
-      0% { width: 170px; height: 170px; opacity: 1; border-width: 4px; }
-      100% { width: 280px; height: 280px; opacity: 0; border-width: 1px; }
-    }
+    @keyframes pulseAnim { 0% { width: 170px; height: 170px; opacity: 1; border-width: 4px; } 100% { width: 280px; height: 280px; opacity: 0; border-width: 1px; } }
 
     .title-container { display: flex; justify-content: center; align-items: center; gap: 10px; }
     .song-title { color: #fff; font-size: 1.3rem; font-weight: 600; text-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    
     .visualizer { display: flex; gap: 3px; align-items: flex-end; height: 16px; opacity: 0; transition: opacity 0.3s; }
     .visualizer.active { opacity: 1; }
     .visualizer span { width: 4px; background: #fff; border-radius: 3px; animation: bounce 0.5s infinite alternate; }
@@ -126,24 +99,18 @@
     .song-note { color: #ffebf0; font-size: 0.8rem; font-style: italic; margin-top: 8px; font-weight: 500; opacity: 1; transition: opacity 0.4s ease; min-height: 20px; }
 
     .controls { display: flex; justify-content: center; align-items: center; gap: 25px; margin-top: 15px; }
-    .volume-wrapper { display: flex; align-items: center; gap: 12px; margin-top: 20px; background: rgba(255, 255, 255, 0.1); padding: 10px 15px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); }
-    
-    .message-btn { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; transition: all 0.3s; z-index: 20; color: white; }
-    .message-btn:hover { background: white; box-shadow: 0 0 20px rgba(255,255,255,0.9); transform: scale(1.15) rotate(10deg); }
-
     .slider-container { width: 100%; position: relative; display: flex; align-items: center; }
     input[type=range] { -webkit-appearance: none; width: 100%; background: rgba(255, 255, 255, 0.3); border-radius: 10px; height: 6px; outline: none; cursor: pointer; }
     input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%; background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff4b72'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E"); background-size: 12px; background-position: center; background-repeat: no-repeat; cursor: pointer; box-shadow: 0 0 10px rgba(0,0,0,0.2); }
-    
     .time-info { display: flex; justify-content: space-between; color: white; font-size: 0.75rem; margin-top: 8px; font-weight: 500; }
     
     .ctrl-btn { background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .btn-play { background-color: #fff; color: #ff4b72; width: 55px; height: 55px; border-radius: 50%; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); transition: transform 0.2s; }
     .btn-play:active { transform: scale(0.95); }
     .ctrl-btn svg { fill: currentColor; } .btn-play svg { fill: #ff4b72; width: 24px; height: 24px; }
-    .vol-icon { color: white; font-size: 14px; }
+    .message-btn { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; transition: all 0.3s; z-index: 20; color: white; }
+    .message-btn:hover { background: white; box-shadow: 0 0 20px rgba(255,255,255,0.9); transform: scale(1.15) rotate(10deg); }
 
-    /* Aşk Termometresi */
     .thermo-container {
       margin-top: 25px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
       padding: 15px 25px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 10px 20px rgba(0,0,0,0.1);
@@ -156,46 +123,103 @@
     .thermo-btn { font-size: 2.8rem; background: none; border: none; cursor: pointer; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2)); outline: none; animation: pulseHeart 1.5s infinite; }
     .thermo-btn:active { transform: scale(0.85); animation: none; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3)); }
 
-    /* Modal */
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 100; }
+    /* =========================================
+       YENİ: 3D AÇILAN ZARF ANİMASYONU (MOBİL UYUMLU)
+       ========================================= */
+    .modal-overlay { 
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+      background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); 
+      display: flex; flex-direction: column; justify-content: center; align-items: center; 
+      opacity: 0; pointer-events: none; transition: all 0.4s ease; z-index: 100; perspective: 1200px;
+    }
     .modal-overlay.active { opacity: 1; pointer-events: auto; }
-    .modal-content { background: rgba(255, 255, 255, 0.95); padding: 30px 25px; border-radius: 25px; width: 90%; max-width: 350px; text-align: center; transform: scale(0.9); opacity: 0; transition: all 0.3s ease; box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
-    .modal-overlay.active .modal-content { transform: scale(1); opacity: 1; }
-    .modal-content h2 { font-family: 'Dancing Script', cursive; color: #ff4b72; font-size: 2.2rem; margin-bottom: 10px; }
-    .modal-content p { color: #444; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px; font-weight: 500; }
-    .close-btn { background: linear-gradient(45deg, #ff4b72, #ff2a55); color: white; border: none; padding: 10px 30px; border-radius: 20px; font-weight: 600; font-size: 0.9rem; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 75, 114, 0.3); }
+    
+    .env-hint {
+      color: white; font-family: 'Dancing Script', cursive; font-size: 2rem;
+      margin-bottom: 30px; animation: bounce 1s infinite alternate; 
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5); transition: opacity 0.3s;
+    }
+    
+    .envelope-wrapper {
+      position: relative; width: 300px; height: 190px;
+      transition: transform 0.4s ease; transform-style: preserve-3d;
+      cursor: pointer;
+      /* Hafifçe titreyerek dikkat çeker */
+      animation: shakeEnv 2.5s infinite;
+    }
+    @keyframes shakeEnv { 0%, 100% { transform: rotate(0deg); } 5% { transform: rotate(3deg); } 10% { transform: rotate(-3deg); } 15% { transform: rotate(0deg); } }
+    .envelope-wrapper.flap-open { animation: none; } /* Açılınca titreme durur */
 
-    /* --- TELEFONLARA ÖZEL UYARLAMALAR (Medya Sorguları) --- */
+    .env-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #ff2a55; border-radius: 10px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); z-index: 1; }
+    .env-left { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #ff4b72; clip-path: polygon(0 0, 50% 50%, 0 100%); z-index: 4; border-radius: 10px 0 0 10px; }
+    .env-right { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #ff4b72; clip-path: polygon(100% 0, 50% 50%, 100% 100%); z-index: 4; border-radius: 0 10px 10px 0; }
+    .env-bottom { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #ff6082; clip-path: polygon(0 100%, 50% 45%, 100% 100%); z-index: 4; border-radius: 0 0 10px 10px; }
+    
+    .env-flap {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #ff1a40;
+      clip-path: polygon(0 0, 100% 0, 50% 55%); transform-origin: top;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); z-index: 5; border-radius: 10px 10px 0 0;
+    }
+    
+    .env-paper {
+      position: absolute; left: 10px; right: 10px; bottom: 10px; height: 170px;
+      background: #fff; border-radius: 8px; z-index: 2; /* Kapalıyken cebin içinde */
+      padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.1); overflow: hidden;
+    }
+    
+    .env-paper h2 { font-family: 'Dancing Script', cursive; color: #ff4b72; font-size: 1.8rem; margin-top: 15px; margin-bottom: 10px; opacity: 0; transition: opacity 0.4s ease; }
+    .env-paper p { color: #444; font-size: 0.85rem; line-height: 1.6; font-weight: 500; text-align: center; opacity: 0; transition: opacity 0.4s ease; }
+    .close-btn { 
+      background: linear-gradient(45deg, #ff4b72, #ff2a55); color: white; border: none; 
+      padding: 10px 30px; border-radius: 20px; font-weight: 600; font-size: 0.9rem; cursor: pointer; 
+      box-shadow: 0 5px 15px rgba(255, 75, 114, 0.3); margin-top: auto; opacity: 0; transition: opacity 0.4s ease;
+    }
+
+    /* JavaScript Sınıfları ile Açılma Animasyonu */
+    .envelope-wrapper.flap-open .env-flap { transform: rotateX(180deg); z-index: 1; }
+    .envelope-wrapper.flap-open + .env-hint { opacity: 0; } /* İpucu yazısını gizle */
+    
+    .envelope-wrapper.paper-out .env-paper {
+      bottom: -40px; height: 380px; transform: scale(1.05);
+      z-index: 10; /* Zarfın dışına (önüne) çıkar */
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3); overflow-y: auto;
+    }
+    .envelope-wrapper.paper-out .env-paper h2 { opacity: 1; transition-delay: 0.5s; }
+    .envelope-wrapper.paper-out .env-paper p { opacity: 1; transition-delay: 0.7s; }
+    .envelope-wrapper.paper-out .env-paper .close-btn { opacity: 1; transition-delay: 0.9s; }
+
     @media (max-width: 450px) {
       .love-title { font-size: 2.2rem; margin-bottom: 10px; }
       .time-counter { font-size: 0.75rem; padding: 5px 10px; width: 90%; max-width: 350px; }
       .player-card { padding: 25px 20px; }
       .spotify-cover { width: 140px; height: 140px; }
       .pulse-ring { width: 140px; height: 140px; }
-      @keyframes pulseAnim {
-        0% { width: 140px; height: 140px; opacity: 1; border-width: 4px; }
-        100% { width: 230px; height: 230px; opacity: 0; border-width: 1px; }
-      }
+      @keyframes pulseAnim { 0% { width: 140px; height: 140px; opacity: 1; border-width: 4px; } 100% { width: 230px; height: 230px; opacity: 0; border-width: 1px; } }
       .song-title { font-size: 1.15rem; }
       .artist-name { font-size: 0.85rem; }
-      .song-note { font-size: 0.75rem; min-height: 18px; }
       .controls { gap: 20px; }
       .btn-play { width: 50px; height: 50px; }
-      .volume-wrapper { display: none; /* Mobilde kendi ses tuşları olduğu için bunu gizliyoruz, daha temiz duruyor */ }
       .message-btn { top: 15px; right: 15px; width: 35px; height: 35px; font-size: 1rem; }
       .thermo-container { padding: 15px 20px; margin-top: 20px; }
       .thermo-btn { font-size: 2.5rem; }
+      
+      /* Mobilde Zarf Boyutu */
+      .envelope-wrapper { width: 270px; height: 170px; }
+      .envelope-wrapper.paper-out .env-paper { bottom: -20px; height: 360px; transform: scale(1.02); }
+      .env-paper h2 { font-size: 1.6rem; }
+      .env-paper p { font-size: 0.8rem; }
     }
   </style>
 </head>
 <body>
 
   <h1 class="love-title">Seni Çok Seviyorum</h1>
-  
   <div class="time-counter" id="timeCounter">Hesaplanıyor...</div>
 
   <div class="player-card" id="mainCard">
-    <button class="message-btn" onclick="toggleModal()">💌</button>
+    <button class="message-btn" onclick="showEnvelopeModal()">💌</button>
 
     <div class="cover-wrapper">
       <div class="pulse-ring" id="pulseRing"></div>
@@ -237,14 +261,6 @@
       </button>
     </div>
     
-    <div class="volume-wrapper">
-      <span class="vol-icon">🔈</span>
-      <div class="slider-container">
-        <input type="range" id="volumeBar" value="80" min="0" max="100">
-      </div>
-      <span class="vol-icon">🔊</span>
-    </div>
-
     <audio id="audioPlayer"></audio>
   </div>
 
@@ -256,11 +272,20 @@
     <button class="thermo-btn" id="thermoBtn">❤️</button>
   </div>
 
+  <!-- YENİ 3D ZARF MODALI -->
   <div class="modal-overlay" id="messageModal">
-    <div class="modal-content">
-      <h2>Benim Güzel Sevgilim,</h2>
-      <p>Hayat karşıma ne çıkarırsa çıkarsın, tek bildiğim şey o yolları sadece senin elini sıkıca tutarak yürümek istediğim. Sen benim en güzel iyikim, bitmesini asla istemediğim en güzel rüyam ve her yeni güne şükretme sebebimsin. Seni dünden daha çok, yarından daha az ama her zaman sonsuz bir aşkla seviyorum. İyi ki benimsin, iyi ki kalbime dokundun. ❤️</p>
-      <button class="close-btn" onclick="toggleModal()">Kapat</button>
+    <p class="env-hint" id="envHint">Açmak için dokun 💌</p>
+    <div class="envelope-wrapper" id="envelopeWrapper" onclick="openEnvelope(event)">
+      <div class="env-back"></div>
+      <div class="env-paper" id="envPaper">
+        <h2>Benim Güzel Sevgilim,</h2>
+        <p>Hayat karşıma ne çıkarırsa çıkarsın, tek bildiğim şey o yolları sadece senin elini sıkıca tutarak yürümek istediğim. Sen benim en güzel iyikim, bitmesini asla istemediğim en güzel rüyam ve her yeni güne şükretme sebebimsin. Seni dünden daha çok, yarından daha az ama her zaman sonsuz bir aşkla seviyorum. İyi ki benimsin, iyi ki kalbime dokundun. ❤️</p>
+        <button class="close-btn" onclick="closeEnvelope(event)">Kapat</button>
+      </div>
+      <div class="env-bottom"></div>
+      <div class="env-left"></div>
+      <div class="env-right"></div>
+      <div class="env-flap" id="envFlap"></div>
     </div>
   </div>
 
@@ -296,7 +321,6 @@
     const songNote = document.getElementById('songNote');
     const coverArt = document.getElementById('coverArt');
     const progressBar = document.getElementById('progressBar');
-    const volumeBar = document.getElementById('volumeBar');
     const currentTimeEl = document.getElementById('currentTime');
     const durationEl = document.getElementById('duration');
     const visualizer = document.getElementById('visualizer');
@@ -305,32 +329,23 @@
     const playSVG = `<path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/>`;
     const pauseSVG = `<path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"/>`;
 
-    // --- BÜYÜ TOZLARI (Mobil İçin Ekstra Optimize Edildi) ---
+    // --- BÜYÜ TOZLARI ---
     let lastDustTime = 0;
     function createMagicDust(x, y) {
       const now = Date.now();
-      // Mobilde çok fazla element birikmesin diye limiti 40ms yaptık
       if (now - lastDustTime < 40) return; 
       lastDustTime = now;
-
       const dust = document.createElement('div');
       dust.classList.add('magic-dust');
-      dust.style.left = (x - 4) + 'px'; 
-      dust.style.top = (y - 4) + 'px';
-      
+      dust.style.left = (x - 4) + 'px'; dust.style.top = (y - 4) + 'px';
       const colors = ['#ffffff', '#ffebf0', '#ff758c', '#ff4b72'];
       dust.style.background = colors[Math.floor(Math.random() * colors.length)];
-      
       document.body.appendChild(dust);
-      
       setTimeout(() => { dust.remove(); }, 600);
     }
-
     window.addEventListener('mousemove', (e) => { createMagicDust(e.pageX, e.pageY); });
     window.addEventListener('touchmove', (e) => {
-      for(let i = 0; i < e.touches.length; i++) {
-        createMagicDust(e.touches[i].pageX, e.touches[i].pageY);
-      }
+      for(let i = 0; i < e.touches.length; i++) { createMagicDust(e.touches[i].pageX, e.touches[i].pageY); }
     }, {passive: true});
 
     // --- BİRLİKTE GEÇEN ZAMAN SAYACI ---
@@ -342,16 +357,13 @@
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const mins = Math.floor((diff / 1000 / 60) % 60);
       const secs = Math.floor((diff / 1000) % 60);
-      
-      // Mobilde sığsın diye yazıyı hafif kısalttık
       if(window.innerWidth <= 450) {
         document.getElementById('timeCounter').innerHTML = `❤️ ${days} Gün, ${hours} Saat, ${mins} Dk, ${secs} Sn ❤️`;
       } else {
         document.getElementById('timeCounter').innerHTML = `❤️ ${days} Gün, ${hours} Saat, ${mins} Dakika, ${secs} Saniye ❤️`;
       }
     }
-    setInterval(updateCounter, 1000);
-    updateCounter();
+    setInterval(updateCounter, 1000); updateCounter();
 
     // --- AŞK TERMOMETRESİ ---
     let fillInterval, drainInterval, thermoValue = 0, isCompleted = false, resetTimeout;
@@ -374,7 +386,6 @@
         }
       }, 30);
     }
-
     function stopThermo(e) {
       if(isCompleted) return;
       clearInterval(fillInterval); thermoBtn.style.animation = 'pulseHeart 1.5s infinite';
@@ -385,7 +396,6 @@
         } else { thermoValue = 0; clearInterval(drainInterval); }
       }, 30);
     }
-
     function finishThermo() {
       isCompleted = true; clearInterval(fillInterval);
       thermoValue = 100; thermoFill.style.width = '100%';
@@ -393,7 +403,6 @@
       thermoBtn.style.transform = 'scale(1.2)'; thermoBtn.style.pointerEvents = 'none';
       if(navigator.vibrate) navigator.vibrate([100, 50, 100]);
       for(let i=0; i<35; i++) setTimeout(createFloatingObject, i * 60);
-
       resetTimeout = setTimeout(() => {
         isCompleted = false; thermoValue = 0; thermoFill.style.width = '0%';
         thermoTitle.innerHTML = "Beni ne kadar seviyorsun?<br><span id='thermoSub'>(Kalbe basılı tut)</span>";
@@ -401,12 +410,51 @@
         thermoBtn.style.animation = 'pulseHeart 1.5s infinite';
       }, 4000);
     }
-
     thermoBtn.addEventListener('mousedown', startThermo);
     thermoBtn.addEventListener('touchstart', startThermo, {passive: false});
     window.addEventListener('mouseup', stopThermo);
     window.addEventListener('touchend', stopThermo);
     window.addEventListener('mouseleave', stopThermo);
+
+    // --- 3D ZARF SCRİPTLERİ ---
+    const envWrapper = document.getElementById('envelopeWrapper');
+    const envHint = document.getElementById('envHint');
+    const modalOverlay = document.getElementById('messageModal');
+
+    function showEnvelopeModal() {
+      modalOverlay.classList.add('active');
+    }
+
+    function openEnvelope(e) {
+      if (envWrapper.classList.contains('flap-open')) return; // Zaten açıksa tekrar tetikleme
+      
+      envWrapper.classList.add('flap-open'); // Kapağı aç
+      envHint.style.opacity = '0'; // İpucu yazısını gizle
+      
+      // Kapak açıldıktan 500ms sonra kağıdı yukarı fırlat
+      setTimeout(() => {
+        envWrapper.classList.add('paper-out');
+      }, 500);
+    }
+
+    function closeEnvelope(e) {
+      e.stopPropagation(); // Tıklamanın zarfı tekrar açmasını engeller
+      
+      // Önce kağıdı içeri sok
+      envWrapper.classList.remove('paper-out');
+      
+      // 500ms sonra kapağı kapat
+      setTimeout(() => {
+        envWrapper.classList.remove('flap-open');
+        envHint.style.opacity = '1';
+        
+        // Zarf tamamen kapandıktan sonra ekranı karartmayı kaldır
+        setTimeout(() => {
+          modalOverlay.classList.remove('active');
+        }, 500);
+      }, 500);
+    }
+
 
     // --- MÜZİK ÇALAR ---
     function updateSliderBackground(slider) {
@@ -417,14 +465,9 @@
     function loadTrack(index) {
       const track = playlist[index];
       audioPlayer.src = track.file;
-      songTitle.innerText = track.title;
-      artistName.innerText = track.artist;
-      songNote.innerText = track.defaultNote;
-      songNote.style.opacity = 1;
-      coverArt.src = track.cover;
-      progressBar.value = 0;
-      updateSliderBackground(progressBar);
-      
+      songTitle.innerText = track.title; artistName.innerText = track.artist;
+      songNote.innerText = track.defaultNote; songNote.style.opacity = 1;
+      coverArt.src = track.cover; progressBar.value = 0; updateSliderBackground(progressBar);
       if(!audioPlayer.paused) { 
         coverArt.classList.add('cover-playing'); visualizer.classList.add('active'); pulseRing.classList.add('active');
       } else { 
@@ -481,11 +524,6 @@
       audioPlayer.currentTime = (progressBar.value / 100) * audioPlayer.duration;
     });
 
-    volumeBar.addEventListener('input', () => {
-      updateSliderBackground(volumeBar);
-      audioPlayer.volume = volumeBar.value / 100;
-    });
-
     function formatTime(seconds) {
       if(isNaN(seconds)) return "0:00";
       const mins = Math.floor(seconds / 60); const secs = Math.floor(seconds % 60);
@@ -493,48 +531,30 @@
     }
 
     audioPlayer.addEventListener('ended', nextSong);
-    function toggleModal() { document.getElementById('messageModal').classList.toggle('active'); }
 
-    // --- GÖRSEL EFEKTLER (Mobilde Kusursuzlaştırıldı) ---
+    // --- GÖRSEL EFEKTLER ---
     function createFloatingObject() {
       const obj = document.createElement('div'); obj.classList.add('floating-obj');
       const objects = ['🤍', '💖', '✨', '🌸', '💕', '💮', '🌺', '🌹'];
       obj.innerText = objects[Math.floor(Math.random() * objects.length)];
       obj.style.left = Math.random() * 100 + 'vw'; obj.style.animationDuration = Math.random() * 3 + 4 + 's';
-      
-      // Emojilerin boyutu telefonda çok devasa durmasın diye ayarlandı
       const size = window.innerWidth <= 450 ? (Math.random() * 10 + 10) : (Math.random() * 15 + 10);
       obj.style.fontSize = size + 'px';
-      
-      if(obj.innerText === '🌸' || obj.innerText === '💮' || obj.innerText === '🌹') {
-        obj.style.filter = "blur(1px)"; obj.style.opacity = "0.5";
-      }
-      document.body.appendChild(obj);
-      setTimeout(() => { obj.remove(); }, 7000);
+      if(obj.innerText === '🌸' || obj.innerText === '💮' || obj.innerText === '🌹') { obj.style.filter = "blur(1px)"; obj.style.opacity = "0.5"; }
+      document.body.appendChild(obj); setTimeout(() => { obj.remove(); }, 7000);
     }
     setInterval(createFloatingObject, 400);
 
     function createShootingStar() {
-      const star = document.createElement('div');
-      star.classList.add('shooting-star');
-      
-      // Yıldızların başlangıç noktası mobilde ekrana girecek şekilde düzeltildi
-      star.style.top = (Math.random() * 40 - 10) + 'vh'; 
-      star.style.left = (Math.random() * 50 + 50) + 'vw'; 
-      
+      const star = document.createElement('div'); star.classList.add('shooting-star');
+      star.style.top = (Math.random() * 40 - 10) + 'vh'; star.style.left = (Math.random() * 50 + 50) + 'vw'; 
       star.style.animationDuration = (Math.random() * 1.5 + 1.2) + 's'; 
-      document.body.appendChild(star);
-      setTimeout(() => { star.remove(); }, 3000);
+      document.body.appendChild(star); setTimeout(() => { star.remove(); }, 3000);
     }
-    
-    function randomStarInterval() {
-      createShootingStar();
-      setTimeout(randomStarInterval, Math.random() * 1500 + 800);
-    }
+    function randomStarInterval() { createShootingStar(); setTimeout(randomStarInterval, Math.random() * 1500 + 800); }
     setTimeout(randomStarInterval, 500);
 
-    loadTrack(currentTrack);
-    audioPlayer.volume = 0.8; updateSliderBackground(volumeBar);
+    loadTrack(currentTrack); audioPlayer.volume = 0.8;
   </script>
 </body>
 </html>
