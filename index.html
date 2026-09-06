@@ -47,7 +47,7 @@
     }
     @keyframes dustFade { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0.2) translateY(20px); opacity: 0; } }
 
-    /* YENİ: Havai Fişek Kalpleri (Çift Tıklama Efekti) */
+    /* Havai Fişek Kalpleri */
     .firework-heart {
       position: absolute; pointer-events: none; font-size: 1.5rem;
       animation: explode 0.8s ease-out forwards; z-index: 1000;
@@ -164,7 +164,7 @@
     .envelope-wrapper.paper-out .env-paper p { opacity: 1; transition-delay: 0.7s; }
     .envelope-wrapper.paper-out .env-paper .close-btn { opacity: 1; transition-delay: 0.9s; }
 
-    /* YENİ: Şifre Modalı */
+    /* Şifre Modalı */
     .password-box { background: rgba(255,255,255,0.95); padding: 30px; border-radius: 25px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
     .password-box h2 { font-family: 'Poppins', sans-serif; color: #333; font-size: 1.5rem; margin-bottom: 10px; }
     .password-box p { color: #666; font-size: 0.85rem; margin-bottom: 20px; }
@@ -172,8 +172,8 @@
     .pwd-btn { background: #ff4b72; color: white; border: none; padding: 12px; border-radius: 15px; font-weight: 600; width: 100%; font-size: 1rem; cursor: pointer; margin-bottom: 10px; box-shadow: 0 5px 15px rgba(255,75,114,0.3); }
     .pwd-cancel { background: #aaa; color: white; border: none; padding: 10px; border-radius: 15px; font-weight: 600; width: 100%; font-size: 0.9rem; cursor: pointer; }
 
-    /* YENİ: Gizli Tetikleyici (Sol üst köşede tamamen görünmez) */
-    .secret-trigger { position: absolute; top: 0; left: 0; width: 60px; height: 60px; z-index: 50; cursor: default; }
+    /* GİZLİ TETİKLEYİCİ - ALANI BÜYÜTÜLDÜ VE EN ÜSTE ALINDI */
+    .secret-trigger { position: absolute; top: 0; left: 0; width: 100px; height: 100px; z-index: 9999; cursor: pointer; }
 
     @media (max-width: 450px) {
       .love-title { font-size: 2.2rem; margin-bottom: 10px; }
@@ -198,7 +198,7 @@
 </head>
 <body>
 
-  <!-- GİZLİ KÖŞE (Tıkla!) -->
+  <!-- GİZLİ KÖŞE (Sol üst köşede, tıklaması çok daha kolay) -->
   <div class="secret-trigger" id="secretTrigger"></div>
 
   <h1 class="love-title" id="mainTitle">Seni Çok Seviyorum</h1>
@@ -275,7 +275,7 @@
     </div>
   </div>
 
-  <!-- YENİ: ŞİFRE MODALI -->
+  <!-- ŞİFRE MODALI -->
   <div class="modal-overlay" id="passwordModal" style="z-index: 150;">
     <div class="password-box">
       <h2>Gizli Kasa 🔒</h2>
@@ -326,20 +326,19 @@
     const playSVG = `<path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/>`;
     const pauseSVG = `<path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"/>`;
 
-    // --- YENİ: KALP HAVAİ FİŞEKLERİ (Double Click / Tap) ---
+    // --- KALP HAVAİ FİŞEKLERİ ---
     function createHeartExplosion(x, y) {
-      const numHearts = window.innerWidth <= 450 ? 12 : 20; // Mobilde kasmaması için daha az kalp
+      const numHearts = window.innerWidth <= 450 ? 12 : 20; 
       const hearts = ['❤️', '💖', '💕', '✨', '🔥'];
       
       for(let i = 0; i < numHearts; i++) {
         const h = document.createElement('div');
         h.classList.add('firework-heart');
         h.innerText = hearts[Math.floor(Math.random() * hearts.length)];
-        h.style.left = x + 'px';
-        h.style.top = y + 'px';
+        h.style.left = x + 'px'; h.style.top = y + 'px';
         
         const angle = Math.random() * Math.PI * 2;
-        const distance = Math.random() * 80 + 50; // 50px ile 130px arası fırlasın
+        const distance = Math.random() * 80 + 50; 
         h.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
         h.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
         
@@ -348,49 +347,43 @@
       }
     }
 
-    // Masaüstü için çift tıklama
     document.addEventListener('dblclick', (e) => {
-      // Butonlara veya inputlara tıklanıyorsa engelle
-      if(e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT') {
+      if(e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT' && !e.target.closest('.secret-trigger')) {
         createHeartExplosion(e.pageX, e.pageY);
       }
     });
 
-    // Mobil için art arda çift dokunma (Double Tap)
     let lastTap = 0;
     document.addEventListener('touchstart', (e) => {
       const currentTime = new Date().getTime();
       const tapLength = currentTime - lastTap;
-      if (tapLength < 300 && tapLength > 0 && e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT') {
+      if (tapLength < 300 && tapLength > 0 && e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT' && !e.target.closest('.secret-trigger')) {
         createHeartExplosion(e.touches[0].pageX, e.touches[0].pageY);
       }
       lastTap = currentTime;
     }, {passive: true});
 
 
-    // --- YENİ: GİZLİ ŞİFRE SİSTEMİ (Easter Egg) ---
+    // --- GİZLİ ŞİFRE SİSTEMİ (DÜZELTİLDİ) ---
     let secretClicks = 0;
     let secretTimer;
-    document.getElementById('secretTrigger').addEventListener('touchstart', handleSecretClick, {passive: true});
-    document.getElementById('secretTrigger').addEventListener('mousedown', handleSecretClick);
-
-    function handleSecretClick(e) {
-      if(e.type === 'mousedown' && e.button !== 0) return; // Sadece sol tık
+    
+    // Tıklama eventini standart "click" ile dinleyerek mobil kargaşasını önlüyoruz
+    document.getElementById('secretTrigger').addEventListener('click', function(e) {
       secretClicks++;
       clearTimeout(secretTimer);
       
-      secretTimer = setTimeout(() => { secretClicks = 0; }, 1200); // 1.2 sn içinde 3 tık lazım
+      // Süreyi 2 saniyeye çıkardım, 3 kere rahatça basabilmen için
+      secretTimer = setTimeout(() => { secretClicks = 0; }, 2000); 
       
-      if(secretClicks === 3) {
+      if(secretClicks >= 3) {
         document.getElementById('passwordModal').classList.add('active');
         document.getElementById('secretPwd').value = '';
-        secretClicks = 0;
+        secretClicks = 0; // Şifre ekranı açılınca sayacı sıfırla
       }
-    }
+    });
 
-    function closePasswordModal() {
-      document.getElementById('passwordModal').classList.remove('active');
-    }
+    function closePasswordModal() { document.getElementById('passwordModal').classList.remove('active'); }
 
     function checkPassword() {
       const pwd = document.getElementById('secretPwd').value;
@@ -403,12 +396,10 @@
       }
     }
 
-    // Mega Şölen Animasyonu
     function triggerMegaExplosion() {
       const title = document.getElementById('mainTitle');
       title.innerText = "SENİ HER ŞEYDEN ÇOK SEVİYORUM!";
-      title.style.color = "#ffebf0";
-      title.style.transform = "scale(1.1)";
+      title.style.color = "#ffebf0"; title.style.transform = "scale(1.1)";
       
       let count = 0;
       const megaInterval = setInterval(() => {
@@ -416,10 +407,9 @@
         const y = Math.random() * window.innerHeight;
         createHeartExplosion(x, y);
         count++;
-        if(count > 25) clearInterval(megaInterval); // 25 patlama sonrası durur
+        if(count > 25) clearInterval(megaInterval); 
       }, 200);
     }
-
 
     // --- BÜYÜ TOZLARI ---
     let lastDustTime = 0;
@@ -427,13 +417,11 @@
       const now = Date.now();
       if (now - lastDustTime < 40) return; 
       lastDustTime = now;
-      const dust = document.createElement('div');
-      dust.classList.add('magic-dust');
+      const dust = document.createElement('div'); dust.classList.add('magic-dust');
       dust.style.left = (x - 4) + 'px'; dust.style.top = (y - 4) + 'px';
       const colors = ['#ffffff', '#ffebf0', '#ff758c', '#ff4b72'];
       dust.style.background = colors[Math.floor(Math.random() * colors.length)];
-      document.body.appendChild(dust);
-      setTimeout(() => { dust.remove(); }, 600);
+      document.body.appendChild(dust); setTimeout(() => { dust.remove(); }, 600);
     }
     window.addEventListener('mousemove', (e) => { createMagicDust(e.pageX, e.pageY); });
     window.addEventListener('touchmove', (e) => {
@@ -495,11 +483,8 @@
       thermoBtn.style.transform = 'scale(1.2)'; thermoBtn.style.pointerEvents = 'none';
       if(navigator.vibrate) navigator.vibrate([100, 50, 100]);
       
-      // Termometre dolunca da havai fişek patlasın
       const btnRect = thermoBtn.getBoundingClientRect();
-      for(let i=0; i<5; i++) {
-        setTimeout(() => createHeartExplosion(btnRect.left + btnRect.width/2, btnRect.top), i * 300);
-      }
+      for(let i=0; i<5; i++) { setTimeout(() => createHeartExplosion(btnRect.left + btnRect.width/2, btnRect.top), i * 300); }
 
       resetTimeout = setTimeout(() => {
         isCompleted = false; thermoValue = 0; thermoFill.style.width = '0%';
@@ -517,9 +502,9 @@
     // --- 3D ZARF SCRİPTLERİ ---
     const envWrapper = document.getElementById('envelopeWrapper');
     const envHint = document.getElementById('envHint');
-    const modalOverlay = document.getElementById('envelopeModal');
+    const envModalOverlay = document.getElementById('envelopeModal');
 
-    function showEnvelopeModal() { modalOverlay.classList.add('active'); }
+    function showEnvelopeModal() { envModalOverlay.classList.add('active'); }
     function openEnvelope(e) {
       if (envWrapper.classList.contains('flap-open')) return; 
       envWrapper.classList.add('flap-open'); envHint.style.opacity = '0'; 
@@ -529,10 +514,9 @@
       e.stopPropagation(); envWrapper.classList.remove('paper-out');
       setTimeout(() => {
         envWrapper.classList.remove('flap-open'); envHint.style.opacity = '1';
-        setTimeout(() => { modalOverlay.classList.remove('active'); }, 500);
+        setTimeout(() => { envModalOverlay.classList.remove('active'); }, 500);
       }, 500);
     }
-
 
     // --- MÜZİK ÇALAR ---
     function updateSliderBackground(slider) {
