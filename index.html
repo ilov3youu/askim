@@ -22,56 +22,81 @@
 
     @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-    /* Sayfa açılış animasyonu eklendi */
     @keyframes slideUpFade {
       from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .love-title { 
-      font-family: 'Dancing Script', cursive; color: white; font-size: 2.8rem; margin-bottom: 25px; 
+      font-family: 'Dancing Script', cursive; color: white; font-size: 2.8rem; margin-bottom: 5px; 
       text-shadow: 0 4px 15px rgba(255, 75, 114, 0.5); z-index: 10; 
       animation: softPulse 3s infinite ease-in-out, slideUpFade 1s ease-out; 
     }
     @keyframes softPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-    .heart-bg { position: absolute; color: rgba(255, 255, 255, 0.6); animation: floatUp linear infinite; pointer-events: none; z-index: 1; }
-    @keyframes floatUp { 0% { transform: translateY(105vh) scale(0.3) rotate(0deg); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; } }
+    /* Zaman Sayacı */
+    .time-counter {
+      background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);
+      padding: 5px 15px; border-radius: 20px; color: white; font-size: 0.85rem;
+      margin-bottom: 20px; z-index: 10; border: 1px solid rgba(255,255,255,0.3);
+      animation: slideUpFade 1.2s ease-out; font-weight: 500; letter-spacing: 0.5px;
+    }
 
-    /* Ana Kart (Mobil uyum için width güncellendi) */
+    /* Arka Plan Objeleri (Kalpler ve Çiçekler) */
+    .floating-obj { position: absolute; animation: floatUp linear infinite; pointer-events: none; z-index: 1; }
+    @keyframes floatUp { 
+      0% { transform: translateY(105vh) scale(0.3) rotate(0deg); opacity: 0; } 
+      20% { opacity: 0.7; } 
+      100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; } 
+    }
+
+    /* Ana Kart - 3D efekti için transform-style eklendi */
     .player-card {
       background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
       padding: 30px; border-radius: 35px; border: 1px solid rgba(255, 255, 255, 0.5);
       box-shadow: 0 30px 50px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.2); 
       width: 90%; max-width: 340px; z-index: 10; position: relative;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: box-shadow 0.4s ease, transform 0.1s; /* Transform transition'ı 3D için kısaltıldı */
       animation: slideUpFade 1.2s ease-out;
+      transform-style: preserve-3d;
     }
-    .player-card:hover { transform: translateY(-5px); box-shadow: 0 35px 60px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.3); }
+    .player-card:hover { box-shadow: 0 35px 60px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.3); }
 
-    .cover-wrapper { display: flex; justify-content: center; margin-bottom: 20px; position: relative; }
-    .track-details { text-align: center; margin-bottom: 15px; }
-    .controls { display: flex; justify-content: center; align-items: center; gap: 25px; margin-top: 15px; }
-    .volume-wrapper { display: flex; align-items: center; gap: 12px; margin-top: 20px; background: rgba(255, 255, 255, 0.1); padding: 10px 15px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); }
+    .cover-wrapper { display: flex; justify-content: center; margin-bottom: 20px; position: relative; transform: translateZ(30px); }
+    .track-details { text-align: center; margin-bottom: 15px; transform: translateZ(20px); }
     
-    .message-btn { position: absolute; top: 25px; right: 25px; background: rgba(255,255,255,0.2); border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; transition: all 0.3s; z-index: 20; color: white; }
-    .message-btn:hover { background: white; box-shadow: 0 0 20px rgba(255,255,255,0.9); transform: scale(1.15) rotate(10deg); }
-
     .spotify-cover { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; box-shadow: 0 15px 35px rgba(0,0,0,0.2), 0 0 0 8px rgba(255,255,255,0.2); transition: all 0.5s ease; }
     .cover-playing { animation: spin 8s linear infinite; box-shadow: 0 15px 35px rgba(0,0,0,0.3), 0 0 0 8px rgba(255,255,255,0.4), 0 0 40px rgba(255, 75, 114, 0.6); }
     .cover-wrapper::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 25px; height: 25px; background: rgba(255,255,255,0.8); border-radius: 50%; box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); pointer-events: none; }
     @keyframes spin { 100% { transform: rotate(360deg); } }
 
+    /* Başlık ve Ses Dalgaları */
+    .title-container { display: flex; justify-content: center; align-items: center; gap: 10px; }
     .song-title { color: #fff; font-size: 1.3rem; font-weight: 600; text-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    
+    .visualizer { display: flex; gap: 3px; align-items: flex-end; height: 16px; opacity: 0; transition: opacity 0.3s; }
+    .visualizer.active { opacity: 1; }
+    .visualizer span { width: 4px; background: #fff; border-radius: 3px; animation: bounce 0.5s infinite alternate; }
+    .visualizer span:nth-child(2) { animation-delay: 0.15s; background: #ffebf0; }
+    .visualizer span:nth-child(3) { animation-delay: 0.3s; background: #ff4b72; }
+    @keyframes bounce { 0% { height: 4px; } 100% { height: 16px; } }
+
     .artist-name { color: rgba(255, 255, 255, 0.9); font-size: 0.95rem; margin-top: 4px; font-weight: 500; }
-    .song-note { color: #ffebf0; font-size: 0.8rem; font-style: italic; margin-top: 8px; opacity: 0.9; }
+    .song-note { color: #ffebf0; font-size: 0.8rem; font-style: italic; margin-top: 8px; font-weight: 500; opacity: 1; transition: opacity 0.4s ease; min-height: 20px; }
+
+    /* Kontroller */
+    .controls { display: flex; justify-content: center; align-items: center; gap: 25px; margin-top: 15px; transform: translateZ(25px); }
+    .volume-wrapper { display: flex; align-items: center; gap: 12px; margin-top: 20px; background: rgba(255, 255, 255, 0.1); padding: 10px 15px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.2); transform: translateZ(15px); }
+    
+    .message-btn { position: absolute; top: 25px; right: 25px; background: rgba(255,255,255,0.2); border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; transition: all 0.3s; z-index: 20; color: white; transform: translateZ(40px); }
+    .message-btn:hover { background: white; box-shadow: 0 0 20px rgba(255,255,255,0.9); transform: scale(1.15) rotate(10deg) translateZ(40px); }
 
     .slider-container { width: 100%; position: relative; display: flex; align-items: center; }
     input[type=range] { -webkit-appearance: none; width: 100%; background: rgba(255, 255, 255, 0.3); border-radius: 10px; height: 6px; outline: none; transition: background 0.1s; cursor: pointer; }
     input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%; background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff4b72'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E"); background-size: 12px; background-position: center; background-repeat: no-repeat; cursor: pointer; box-shadow: 0 0 10px rgba(0,0,0,0.2); transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.4); }
 
-    .time-info { display: flex; justify-content: space-between; color: white; font-size: 0.75rem; margin-top: 8px; font-weight: 500; }
+    .time-info { display: flex; justify-content: space-between; color: white; font-size: 0.75rem; margin-top: 8px; font-weight: 500; transform: translateZ(10px); }
     
     .ctrl-btn { background: none; border: none; color: white; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; }
     .ctrl-btn:hover { filter: drop-shadow(0 0 8px rgba(255,255,255,0.8)); transform: scale(1.15); }
@@ -82,29 +107,20 @@
 
     /* Aşk Termometresi */
     .thermo-container {
-      margin-top: 25px;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-      padding: 20px 25px; border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      z-index: 10;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center;
-      width: 90%; max-width: 340px;
-      animation: slideUpFade 1.4s ease-out;
+      margin-top: 25px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      padding: 20px 25px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      z-index: 10; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center;
+      width: 90%; max-width: 340px; animation: slideUpFade 1.4s ease-out;
     }
     .thermo-container:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(0,0,0,0.15); }
-    
     .thermo-text { color: white; font-size: 1.05rem; font-weight: 600; margin-bottom: 12px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); min-height: 48px; }
     .thermo-text span { font-size: 0.85rem; font-weight: 400; opacity: 0.9; display: block; margin-top: 4px; }
-    
     .thermo-bar-bg { width: 100%; height: 14px; background: rgba(255,255,255,0.3); border-radius: 10px; overflow: hidden; margin-bottom: 15px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.1); }
     .thermo-bar-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #ff758c, #ff2a55); border-radius: 10px; box-shadow: 0 0 15px rgba(255, 75, 114, 0.8); transition: width 0.1s linear; }
-    
-    .thermo-btn { font-size: 3rem; background: none; border: none; cursor: pointer; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2)); transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); touch-action: none; -webkit-tap-highlight-color: transparent; outline: none; animation: pulseHeart 1.5s infinite; }
+    .thermo-btn { font-size: 3rem; background: none; border: none; cursor: pointer; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2)); transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); outline: none; animation: pulseHeart 1.5s infinite; }
     .thermo-btn:active { transform: scale(0.85); animation: none; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3)); }
-    @keyframes pulseHeart { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
 
+    /* Modal */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(12px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 100; }
     .modal-overlay.active { opacity: 1; pointer-events: auto; }
     .modal-content { background: rgba(255, 255, 255, 0.95); padding: 40px 30px; border-radius: 25px; width: 85%; max-width: 400px; text-align: center; transform: scale(0.8) translateY(50px); opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 25px 50px rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.8); }
@@ -112,12 +128,15 @@
     .modal-content h2 { font-family: 'Dancing Script', cursive; color: #ff4b72; font-size: 2.4rem; margin-bottom: 15px; }
     .modal-content p { color: #444; font-size: 0.95rem; line-height: 1.7; margin-bottom: 25px; font-weight: 500; }
     .close-btn { background: linear-gradient(45deg, #ff4b72, #ff2a55); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(255, 75, 114, 0.3); }
-    .close-btn:hover { background: linear-gradient(45deg, #ff2a55, #ff4b72); box-shadow: 0 8px 20px rgba(255, 75, 114, 0.5); transform: translateY(-2px); }
+    .close-btn:hover { background: linear-gradient(45deg, #ff2a55, #ff4b72); transform: translateY(-2px); }
   </style>
 </head>
 <body>
 
   <h1 class="love-title">Seni Çok Seviyorum</h1>
+  
+  <!-- Birlikte Geçen Zaman Sayacı -->
+  <div class="time-counter" id="timeCounter">Hesaplanıyor...</div>
 
   <div class="player-card" id="mainCard">
     <button class="message-btn" onclick="toggleModal()">💌</button>
@@ -127,7 +146,12 @@
     </div>
 
     <div class="track-details">
-      <div class="song-title" id="songTitle">Şarkı Yükleniyor...</div>
+      <div class="title-container">
+        <div class="song-title" id="songTitle">Şarkı Yükleniyor...</div>
+        <div class="visualizer" id="visualizer">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
       <div class="artist-name" id="artistName">Sanatçı</div>
       <div class="song-note" id="songNote">"Seninle dinlemek en güzeli..."</div>
     </div>
@@ -184,11 +208,41 @@
   </div>
 
   <script>
+    // --- 1. AŞAMADAKİ LİSTE VE ZAMANLI SÖZLER ---
+    // Her şarkıya "lyrics" dizisi ekledik. Belirli saniyelerde ekrandaki not değişecek.
     const playlist = [
-      { title: "LaLaLa!", artist: "Jeff RED", note: "Bu şarkının enerjisi tam bizlik 💖", cover: "lalala.png", file: "lalala.mp3" },
-      { title: "Yıldızlar Şahit Aşkıma", artist: "Lvbel C5", note: "Gökyüzündeki tüm yıldızlar şahidim ✨", cover: "yildiz.jpg", file: "yildizlarsahitaskima.mp3" },
-      { title: "Yenildiğim Tek Savaştın", artist: "ASLAR", note: "Sana yenilmek dünyanın en güzel hissi 🤍", cover: "yenildigimteksavastin.png", file: "yenildigimteksavastin.mp3" },
-      { title: "Geri Ver", artist: "Wegh", note: "Sensiz geçen zamanı geri ver... 🌸", cover: "geriveri.jpg", file: "geriver.mp3" }
+      { 
+        title: "LaLaLa!", artist: "Jeff RED", cover: "lalala.png", file: "lalala.mp3",
+        defaultNote: "Bu şarkının enerjisi tam bizlik 💖",
+        lyrics: [
+          { time: 10, text: "Seninle her an böyle enerjik..." },
+          { time: 30, text: "Birlikte çok güzeliz! 🌸" }
+        ]
+      },
+      { 
+        title: "Yıldızlar Şahit Aşkıma", artist: "Lvbel C5", cover: "yildiz.jpg", file: "yildizlarsahitaskima.mp3",
+        defaultNote: "Gökyüzündeki tüm yıldızlar şahidim ✨",
+        lyrics: [
+          { time: 15, text: "Gözlerin yıldızlardan daha parlak..." },
+          { time: 40, text: "Seni dünyalar kadar seviyorum 🤍" }
+        ]
+      },
+      { 
+        title: "Yenildiğim Tek Savaştın", artist: "ASLAR", cover: "yenildigimteksavastin.png", file: "yenildigimteksavastin.mp3",
+        defaultNote: "Sana yenilmek dünyanın en güzel hissi 🤍",
+        lyrics: [
+          { time: 20, text: "Kalbim sana ilk günden teslim..." },
+          { time: 50, text: "İyi ki kaybetmişim o savaşı 💖" }
+        ]
+      },
+      { 
+        title: "Geri Ver", artist: "Wegh", cover: "geriveri.jpg", file: "geriver.mp3",
+        defaultNote: "Sensiz geçen zamanı geri ver... 🌸",
+        lyrics: [
+          { time: 25, text: "Keşke seni daha önce tanısaydım..." },
+          { time: 60, text: "Artık hep benimlesin ❤️" }
+        ]
+      }
     ];
 
     let currentTrack = 0;
@@ -202,18 +256,60 @@
     const volumeBar = document.getElementById('volumeBar');
     const currentTimeEl = document.getElementById('currentTime');
     const durationEl = document.getElementById('duration');
-    const messageModal = document.getElementById('messageModal');
-
+    const visualizer = document.getElementById('visualizer');
+    
     const playSVG = `<path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/>`;
     const pauseSVG = `<path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"/>`;
 
-    // --- AŞK TERMOMETRESİ SCRİPTİ ---
-    let fillInterval;
-    let drainInterval;
-    let thermoValue = 0;
-    let isCompleted = false;
-    let resetTimeout;
+    // --- 3D KART EFEKTİ (Mouse Hover) ---
+    const card = document.getElementById('mainCard');
     
+    card.addEventListener('mousemove', (e) => {
+      // Sadece bilgisayarda (fare varken) çalışması için ufak bir genişlik kontrolü
+      if (window.innerWidth > 768) {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left; // Kart içindeki mouse X pozisyonu
+        const y = e.clientY - rect.top;  // Kart içindeki mouse Y pozisyonu
+        
+        // Merkezi bul ve açıyı hesapla
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = ((y - centerY) / centerY) * -8; // Eğilme şiddeti
+        const rotateY = ((x - centerX) / centerX) * 8;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)`;
+      card.style.transition = `transform 0.5s ease, box-shadow 0.4s ease`;
+    });
+
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = `transform 0.1s ease, box-shadow 0.4s ease`;
+    });
+
+    // --- BİRLİKTE GEÇEN ZAMAN SAYACI ---
+    // BURAYA KENDİ YILDÖNÜMÜ TARİHİNİZİ GİR (Yıl, Ay, Gün)
+    const startDate = new Date('2023-05-14T00:00:00'); 
+    
+    function updateCounter() {
+      const now = new Date();
+      const diff = now - startDate;
+      
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((diff / 1000 / 60) % 60);
+      
+      document.getElementById('timeCounter').innerHTML = `❤️ ${days} Gün, ${hours} Saat, ${mins} Dakikadır Birlikteyiz ❤️`;
+    }
+    setInterval(updateCounter, 60000); // Dakikada bir güncelle
+    updateCounter(); // Sayfa açılınca hemen hesapla
+
+    // --- AŞK TERMOMETRESİ ---
+    let fillInterval, drainInterval, thermoValue = 0, isCompleted = false, resetTimeout;
     const thermoFill = document.getElementById('thermoFill');
     const thermoBtn = document.getElementById('thermoBtn');
     const thermoTitle = document.getElementById('thermoTitle');
@@ -222,23 +318,16 @@
     function startThermo(e) {
       if(e.type === 'touchstart') e.preventDefault();
       if(isCompleted) return;
-      
       clearInterval(drainInterval);
       clearTimeout(resetTimeout);
       thermoBtn.style.animation = 'none';
-      
       fillInterval = setInterval(() => {
         if (thermoValue < 100) {
           thermoValue += 1.5; 
           thermoFill.style.width = thermoValue + '%';
-          
-          if (thermoValue > 25 && thermoValue < 60) {
-            thermoSub.innerText = "(Hadi biraz daha...)";
-          } else if (thermoValue >= 60 && thermoValue < 95) {
-            thermoSub.innerText = "(Az kaldı! 💖)";
-          } else if (thermoValue >= 100) {
-            finishThermo();
-          }
+          if (thermoValue > 25 && thermoValue < 60) thermoSub.innerText = "(Hadi biraz daha...)";
+          else if (thermoValue >= 60 && thermoValue < 95) thermoSub.innerText = "(Az kaldı! 💖)";
+          else if (thermoValue >= 100) finishThermo();
         }
       }, 30);
     }
@@ -247,43 +336,31 @@
       if(isCompleted) return;
       clearInterval(fillInterval);
       thermoBtn.style.animation = 'pulseHeart 1.5s infinite';
-      
       drainInterval = setInterval(() => {
         if (thermoValue > 0) {
           thermoValue -= 1.5; 
           thermoFill.style.width = thermoValue + '%';
           if(thermoValue < 25) thermoSub.innerText = "(Kalbe basılı tut)";
         } else {
-          thermoValue = 0;
-          clearInterval(drainInterval);
+          thermoValue = 0; clearInterval(drainInterval);
         }
       }, 30);
     }
 
     function finishThermo() {
-      isCompleted = true;
-      clearInterval(fillInterval);
-      thermoValue = 100;
-      thermoFill.style.width = '100%';
-      
+      isCompleted = true; clearInterval(fillInterval);
+      thermoValue = 100; thermoFill.style.width = '100%';
       thermoTitle.innerHTML = "Ben seni DAHA ÇOK seviyorum! ❤️";
       thermoBtn.style.transform = 'scale(1.3)';
       thermoBtn.style.pointerEvents = 'none';
       
       if(navigator.vibrate) navigator.vibrate([100, 50, 100]);
-      
-      for(let i=0; i<35; i++) {
-        setTimeout(createHeart, i * 60);
-      }
+      for(let i=0; i<35; i++) setTimeout(createFloatingObject, i * 60);
 
-      // HATA ÇÖZÜMÜ: Butonu 4 saniye sonra tekrar kullanılabilir hale getiriyoruz
       resetTimeout = setTimeout(() => {
-        isCompleted = false;
-        thermoValue = 0;
-        thermoFill.style.width = '0%';
+        isCompleted = false; thermoValue = 0; thermoFill.style.width = '0%';
         thermoTitle.innerHTML = "Beni ne kadar seviyorsun?<br><span id='thermoSub'>(Kalbe basılı tut)</span>";
-        thermoBtn.style.transform = 'scale(1)';
-        thermoBtn.style.pointerEvents = 'auto';
+        thermoBtn.style.transform = 'scale(1)'; thermoBtn.style.pointerEvents = 'auto';
         thermoBtn.style.animation = 'pulseHeart 1.5s infinite';
       }, 4000);
     }
@@ -292,8 +369,9 @@
     thermoBtn.addEventListener('touchstart', startThermo, {passive: false});
     window.addEventListener('mouseup', stopThermo);
     window.addEventListener('touchend', stopThermo);
-    window.addEventListener('mouseleave', stopThermo); // Mouse dışarı çıkarsa durdur
+    window.addEventListener('mouseleave', stopThermo);
 
+    // --- MÜZİK ÇALAR VE AKAN SÖZLER (Lyrical Notes) ---
     function updateSliderBackground(slider) {
       const val = (slider.value - slider.min) / (slider.max - slider.min) * 100;
       slider.style.background = `linear-gradient(to right, #ffffff ${val}%, rgba(255, 255, 255, 0.2) ${val}%)`;
@@ -304,12 +382,19 @@
       audioPlayer.src = track.file;
       songTitle.innerText = track.title;
       artistName.innerText = track.artist;
-      songNote.innerText = track.note;
+      songNote.innerText = track.defaultNote;
+      songNote.style.opacity = 1;
       coverArt.src = track.cover;
       progressBar.value = 0;
       updateSliderBackground(progressBar);
-      if(!audioPlayer.paused) { coverArt.classList.add('cover-playing'); }
-      else { coverArt.classList.remove('cover-playing'); }
+      
+      if(!audioPlayer.paused) { 
+        coverArt.classList.add('cover-playing'); 
+        visualizer.classList.add('active');
+      } else { 
+        coverArt.classList.remove('cover-playing'); 
+        visualizer.classList.remove('active');
+      }
     }
 
     function togglePlay() {
@@ -317,10 +402,12 @@
         audioPlayer.play();
         playIcon.innerHTML = pauseSVG;
         coverArt.classList.add('cover-playing');
+        visualizer.classList.add('active'); // Dalgalar başlar
       } else {
         audioPlayer.pause();
         playIcon.innerHTML = playSVG;
         coverArt.classList.remove('cover-playing');
+        visualizer.classList.remove('active'); // Dalgalar durur
       }
     }
 
@@ -329,7 +416,7 @@
       loadTrack(currentTrack);
       audioPlayer.play();
       playIcon.innerHTML = pauseSVG;
-      coverArt.classList.add('cover-playing');
+      visualizer.classList.add('active');
     }
 
     function prevSong() {
@@ -337,8 +424,10 @@
       loadTrack(currentTrack);
       audioPlayer.play();
       playIcon.innerHTML = pauseSVG;
-      coverArt.classList.add('cover-playing');
+      visualizer.classList.add('active');
     }
+
+    let activeLyricText = ""; // O anki sözü takip etmek için
 
     audioPlayer.addEventListener('timeupdate', () => {
       if (audioPlayer.duration) {
@@ -347,6 +436,28 @@
         updateSliderBackground(progressBar);
         currentTimeEl.innerText = formatTime(audioPlayer.currentTime);
         durationEl.innerText = formatTime(audioPlayer.duration);
+
+        // Şarkı sözü (Lirik) kontrolü
+        const track = playlist[currentTrack];
+        let currentText = track.defaultNote;
+        
+        if (track.lyrics) {
+          for (let i = 0; i < track.lyrics.length; i++) {
+            if (audioPlayer.currentTime >= track.lyrics[i].time) {
+              currentText = track.lyrics[i].text;
+            }
+          }
+        }
+
+        // Metin değişmesi gerekiyorsa yumuşak geçiş (Fade) yap
+        if (songNote.innerText !== currentText && activeLyricText !== currentText) {
+          activeLyricText = currentText;
+          songNote.style.opacity = 0; // Yazıyı görünmez yap
+          setTimeout(() => {
+            songNote.innerText = currentText; // Metni değiştir
+            songNote.style.opacity = 1; // Tekrar görünür yap
+          }, 400); // 0.4s CSS animasyonu ile uyumlu
+        }
       }
     });
 
@@ -370,21 +481,32 @@
 
     audioPlayer.addEventListener('ended', nextSong);
 
-    function toggleModal() { messageModal.classList.toggle('active'); }
+    // --- MODAL VE GÖRSEL EFEKTLER (Kalp ve Çiçekler) ---
+    function toggleModal() { document.getElementById('messageModal').classList.toggle('active'); }
 
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart-bg');
-      const hearts = ['🤍', '💖', '✨', '🌸', '💕'];
-      heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = Math.random() * 3 + 4 + 's';
-      heart.style.fontSize = Math.random() * 15 + 10 + 'px';
-      document.body.appendChild(heart);
-      setTimeout(() => { heart.remove(); }, 7000);
+    function createFloatingObject() {
+      const obj = document.createElement('div');
+      obj.classList.add('floating-obj');
+      // Sadece kalp değil, gül yaprağı ve çiçek emojileri de eklendi!
+      const objects = ['🤍', '💖', '✨', '🌸', '💕', '💮', '🌺', '🌹'];
+      obj.innerText = objects[Math.floor(Math.random() * objects.length)];
+      obj.style.left = Math.random() * 100 + 'vw';
+      obj.style.animationDuration = Math.random() * 3 + 4 + 's';
+      obj.style.fontSize = Math.random() * 15 + 10 + 'px';
+      
+      // Çiçeklere hafif bulanıklık vererek arka planda süzülüyor hissini arttırdık
+      if(obj.innerText === '🌸' || obj.innerText === '💮' || obj.innerText === '🌹') {
+        obj.style.filter = "blur(1px)";
+        obj.style.opacity = "0.5";
+      }
+
+      document.body.appendChild(obj);
+      setTimeout(() => { obj.remove(); }, 7000);
     }
-    setInterval(createHeart, 400);
+    // Her 400ms'de bir rastgele obje üret (Kalp, gül, çiçek)
+    setInterval(createFloatingObject, 400);
 
+    // Başlangıç Ayarları
     loadTrack(currentTrack);
     audioPlayer.volume = 0.8;
     updateSliderBackground(volumeBar);
